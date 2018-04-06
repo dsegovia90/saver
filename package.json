@@ -1,0 +1,22 @@
+{
+  "name": "express-react",
+  "version": "1.0.0",
+  "description": "Express with create-react-app",
+  "main": "server.js",
+  "scripts": {
+    "webapp-install": "cd webapp && npm install",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "webapp": "npm start --prefix webapp",
+    "dev": "concurrently \"npm run server\" \"npm run webapp\""
+  },
+  "author": "Daniel S.",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^3.5.1",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  }
+}
