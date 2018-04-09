@@ -1,13 +1,13 @@
-const express = require('express');
+import express from 'express';
 const app = express();
 const port = 8080;
 
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const bodyParser = require('body-parser');
+import bodyParser from 'body-parser';
 
 const router = express.Router();
-const apiEndpoint = require('./api/routes/savings');
+import apiEndpoint from  './api/routes/savings';
 
 const mongoDB = 'mongodb://127.0.0.1/saver';
 mongoose.connect(mongoDB);

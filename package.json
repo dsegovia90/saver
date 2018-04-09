@@ -6,7 +6,7 @@
   "scripts": {
     "webapp-install": "cd webapp && npm install",
     "start": "node server.js",
-    "server": "nodemon server.js",
+    "server": "babel-watch server.js",
     "webapp": "npm start --prefix webapp",
     "dev": "concurrently \"npm run server\" \"npm run webapp\""
   },
@@ -17,13 +17,17 @@
     "express": "^4.16.3",
     "express-graphql": "^0.6.12",
     "graphql": "^0.13.2",
+    "graphql-compose": "^3.1.1",
+    "graphql-compose-mongoose": "^3.1.2",
     "mongoose": "^5.0.13"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-watch": "^2.0.7",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.7.0",
-    "nodemon": "^1.17.3"
+    "eslint-plugin-react": "^7.7.0"
   }
 }
