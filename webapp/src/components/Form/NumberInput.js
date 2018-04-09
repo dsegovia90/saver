@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './NumberInput.css';
 import PropTypes from 'prop-types';
+import './NumberInput.css';
 
 class NumberInput extends Component {
   constructor() {
