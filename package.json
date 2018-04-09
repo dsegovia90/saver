@@ -13,12 +13,11 @@
   "author": "Daniel S.",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "concurrently": "^3.5.1",
     "express": "^4.16.3",
     "express-graphql": "^0.6.12",
     "graphql": "^0.13.2",
-    "graphql-compose": "^3.1.1",
-    "graphql-compose-mongoose": "^3.1.2",
     "mongoose": "^5.0.13"
   },
   "devDependencies": {

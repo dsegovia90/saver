@@ -1,13 +1,10 @@
+import bodyParser from 'body-parser';
 import express from 'express';
+import mongoose from 'mongoose';
+import apiEndpoint from './api/routes/savings';
+
 const app = express();
 const port = 8080;
-
-import mongoose from 'mongoose';
-
-import bodyParser from 'body-parser';
-
-const router = express.Router();
-import apiEndpoint from  './api/routes/savings';
 
 const mongoDB = 'mongodb://127.0.0.1/saver';
 mongoose.connect(mongoDB);
