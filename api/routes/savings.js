@@ -1,40 +1,31 @@
-const express = require('express');
-const router = express.Router();
+import graphqlHTTP from 'express-graphql';
+import { buildSchema } from 'graphql';
+import UserModel from '../models/User';
 
-const User = require('../models/users')
 
-router.get('/', (req, res) => {
-  const daniel = User.findOne({user_name: 'daniel'})
-  daniel.then((data) => {
-    if(data) {
-      res.json(data);
-    } else {
-      const newDaniel = new User();
-      newDaniel.user_name = 'daniel';
-      newDaniel.monthly_earnings = 10.1;
-      newDaniel.save()
-      .then((data) => {
-        res.json(data);
-      })
-    }
-  })
-  .catch((err) => {
-    console.log(err)
-  })
-})
+const schema = buildSchema(`
+  type Query {
+    users(user_name: String): [User]
+  },
+  type User {
+    user_name: String,
+    monthly_earnings: Float,
+    desired_monthly_savings: Float
+  }
+`);
 
-router.put('/', (req, res) => {
-  const body = req.body;
-  const fetchUser = User.findOne({user_name: body.user_name});
-  fetchUser.then((user) => {
-    if(user) {
-      user.monthly_earnings = body.monthly_earnings
-      user.desired_monthly_savings = body.desired_monthly_savings;
-      user.save();
-    }
-  })
-  .catch(err => console.log(err));
-  res.json({response: 'Update received!'})
-})
+const getUsers = args => UserModel.find(args)
+  .then((data) => {
+    console.log(data);
+    return data;
+  });
 
-module.exports = router;
+const rootValue = {
+  users: getUsers,
+};
+
+export default graphqlHTTP({
+  schema,
+  rootValue,
+  graphiql: true,
+});
