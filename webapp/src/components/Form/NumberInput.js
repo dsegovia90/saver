@@ -1,32 +1,32 @@
 import React, { Component } from 'react';
 import './NumberInput.css';
+import PropTypes from 'prop-types';
 
-class Input extends Component {
+class NumberInput extends Component {
   constructor() {
-    super()
+    super();
 
     this.state = {
-      value: 0
-    }
+      value: 0,
+    };
 
     this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
-    this.setState({
-      value: newProps.value
-    })
+    const { value } = newProps;
+    this.setState({ value });
   }
 
   handleChange(e) {
-    const target = e.target;
-    let value = target.value >= 0 ? target.value : 0;
-    this.setState({value}, () => {
+    const { target } = e;
+    const value = target.value >= 0 ? target.value : 0;
+    this.setState({ value }, () => {
       const sendState = {
-        [target.name]: this.state.value
-     }
-     this.props.handleChange(sendState)
-   })
+        [target.name]: this.state.value,
+      };
+      this.props.handleChange(sendState);
+    });
   }
 
   render() {
@@ -37,12 +37,18 @@ class Input extends Component {
           id={this.props.name}
           name={this.props.name}
           onChange={this.handleChange}
-          type='number'
+          type="number"
           value={this.state.value}
-          />
+        />
       </div>
     );
   }
 }
 
-export default Input;
+NumberInput.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+};
+
+export default NumberInput;
