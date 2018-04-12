@@ -61,14 +61,14 @@ class Dashboard extends Component {
     });
   }
 
-  handleChange(variables) {
-    variables.userName = this.state.userName
+  handleChange(change) {
+    const variables = change;
+    variables.userName = this.state.userName;
     this.props.updateSettings({
       variables,
     })
-      .then(({data}) => {
+      .then(({ data }) => {
         const newState = data.updateSettings;
-        delete newState['__typename'];
         this.setState(newState);
       });
   }
