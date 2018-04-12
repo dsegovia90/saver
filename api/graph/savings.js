@@ -5,34 +5,40 @@ import UserModel from '../models/user';
 
 const schema = buildSchema(`
   type Query {
-    users(user_name: String): [User]
+    users(userName: String): [User]
   },
   type Mutation {
-    update_earnings(user_name: String, value: Float): User
+    updateSettings(
+      userName: String,
+      monthlyEarnings: Float,
+      desiredMonthlySavings: Float): User
   },
   type User {
-    user_name: String,
-    monthly_earnings: Float,
-    desired_monthly_savings: Float
+    userName: String,
+    monthlyEarnings: Float,
+    desiredMonthlySavings: Float
   }
 `);
 
-const getUsers = args => UserModel.find(args)
+const users = args => UserModel.find(args)
   .then(data => data)
   .catch(err => console.log(err));
 
-const updateSettings = args => UserModel.findOne({ user_name: args.user_name })
+const updateSettings = args => UserModel.findOne({ userName: args.userName })
   .then((data) => {
-    const newData = data;
-    newData.monthly_earnings = args.value;
-    return newData.save();
+    const updatedData = data;
+
+    const incomingData = args;
+    delete incomingData.userName;
+
+    Object.assign(updatedData, args);
+    return updatedData.save();
   })
-  .then(data => data)
   .catch(err => console.log(err));
 
 const rootValue = {
-  users: getUsers,
-  update_settings: updateSettings,
+  users,
+  updateSettings,
 };
 
 export default graphqlHTTP({

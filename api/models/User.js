@@ -3,22 +3,22 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const UserModelSchema = new Schema({
-  user_name: {
+  userName: {
     type: String,
     required: true,
     unique: true,
   },
-  monthly_earnings: {
+  monthlyEarnings: {
     type: Number,
     default: 0,
     min: 0,
   },
-  desired_monthly_savings: {
+  desiredMonthlySavings: {
     type: Number,
     default: 0,
     min: 0,
   },
-  daily_expenses: {
+  dailyExpenses: {
     type: Array,
     default: [],
   },

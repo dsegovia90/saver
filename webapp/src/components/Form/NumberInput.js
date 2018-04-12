@@ -3,19 +3,20 @@ import PropTypes from 'prop-types';
 import './NumberInput.css';
 
 class NumberInput extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      value: 0,
+      value: props.value,
     };
 
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentWillReceiveProps(newProps) {
-    const { value } = newProps;
-    this.setState({ value });
+  componentWillReceiveProps({ value }) {
+    this.setState({
+      value,
+    });
   }
 
   handleChange(e) {
@@ -46,6 +47,7 @@ class NumberInput extends Component {
 }
 
 NumberInput.propTypes = {
+  value: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
